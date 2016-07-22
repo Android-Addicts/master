@@ -1,0 +1,14 @@
+We use the Slack app, so this is what you'll have to use to communicate with the team.
+
+Requirements to join CHAT:
+
+None
+
+Requirements if you WANT HELP with your builds:
+
+- Have Linux installed.
+
+- Compile and successfully flash your own ROM build first. 
+    - Building CyanogenMod using CyanogenMod device trees and kernel source is the easiest,
+      but we really don't care what you build.  We just want to know that your build environment
+      is properly configured!
