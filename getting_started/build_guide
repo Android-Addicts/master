@@ -1,0 +1,113 @@
+Setting up Ubuntu 15.10/16.04 
+for Android 
+and 
+Custom Toolchains
+
+First rule: NEVER use sudo unless instructed to do so, or you really know what you are doing!
+
+
+First update the entire system
+	sudo apt-get update
+
+
+Then run
+	sudo apt-get upgrade
+
+
+To upgrade even further (Shouldn't be necessary, but I do it)
+	sudo apt-get dist-upgrade
+
+
+Get rid of all installed java versions
+             sudo apt-get --purge remove openjdk-* icedtea-* icedtea6-*
+
+Get the JDK V.7 & V.8
+sudo apt-get install openjdk-7-jdk openjdk-8-jdk
+
+
+Update Java version – 7 or 8 depending on rom
+sudo update-alternatives -–config java
+sudo update-alternatives -–config javac
+
+
+
+
+
+
+
+
+
+
+
+
+
+Get a few tools to begin with
+sudo apt-get install python git-core
+
+
+Get the Android SDK or Android Studio
+http://developer.android.com/sdk/index.html
+
+
+Open up .bashrc file in ~/”username” & paste these lines to the bottom
+#Android Tools
+export PATH=${PATH}:~/android-sdk/tools
+export PATH=${PATH}:~/android-sdk/platform-tools
+      export PATH=${PATH}:~/bin
+
+
+In ~/.profile (same place your .bashrc is) paste this at the bottom
+PATH="$HOME/android-sdk/tools:$HOME/android-sdk/platform-tools:$PATH"
+
+Reload .bashrc and .profile (run in terminal)
+         source ~/.bashrc  (or . ~/.bashrc )
+	source ~/.profile (or . ~/.profile )
+
+Update the SDK (Run in terminal)
+	android update sdk –no-ui (run android for gui)
+	(see http://tools.android.com/recent/updatingsdkfromcommand-line )
+
+ Install required build packages
+	sudo apt-get install gnupg flex bison gperf build-essential lzop \
+ 	zip curl zlib1g-dev zlib1g-dev:i386 libc6-dev lib32ncurses5-dev lib32z1 \
+ 	lib32ncurses5 x11proto-core-dev libx11-dev:i386 libreadline6-dev \
+ 	lib32z1-dev libgl1-mesa-glx libgl1-mesa-dev g++-multilib tofrodos \
+ 	python-markdown libxml2-utils xsltproc readline-common libreadline6-dev \ 
+      libncurses5-dev lib32readline6 libreadline-dev libreadline6-dev:i386 \
+  	libreadline6-dev:i386 libreadline6:i386 bzip2 libbz2-dev libbz2-1.0 \
+	libghc-bzlib-dev libsdl1.2-dev libesd0-dev squashfs-tools pngcrush \
+  	libsdl1.2-dev libesd0-dev squashfs-tools pngcrush schedtool binutils-mingw-w64 
+
+
+Create needed symlink
+sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
+
+
+
+
+Install repo tool (run commands one after another)
+mkdir ~/bin
+PATH=~/bin:$PATH
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+
+
+
+
+
+Build tools for custom toolchains
+https://gitlab.com/SaberMod/sabermod-manifest/blob/master/README.md
+
+
+Install all tools for SaberMod (I include a few missing things)
+sudo apt-get install libcap-dev texinfo automake autoconf \
+python-dev  libgmp-dev \
+build-essential gcc-multilib g++-multilib libncurses5-dev flex bison \
+gawk libosl-dev libtool 
+cloog-isl libcloog-isl4 libcloog-isl-dev
+
+Link Header Files for multilib
+sudo ln -s /usr/include/asm-generic /usr/include/asm;
+
+Get prebuilt Libraries (I use xanaxdroid's) And folow the directions on the site
+https://bitbucSaberModket.org/xanaxdroid/sabermod-prebuilts
